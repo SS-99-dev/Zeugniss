@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schülernoten auslosen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Noten für Schüler auslosen</h1>
+    <button onclick="auslosen()">Noten auslosen</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Schüler</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody id="notenListe">
+            <!-- Hier werden die Schüler dynamisch hinzugefügt -->
+        </tbody>
+    </table>
 
+    <script>
+        // Liste der Schülernamen
+        const schuelerNamen = [
+            "Anna", "Ben", "Clara", "David", "Emma", "Felix", 
+            "Greta", "Hans", "Isabel", "Jonas", "Klara", "Lukas",
+            "Maria", "Nico", "Olivia", "Paul", "Quentin", "Rita",
+            "Sarah", "Tom", "Ulrike", "Viktor", "Wilma", "Xenia",
+            "Yannik", "Zoe", "Lea", "Max"
+        ];
+
+        // Tabelle initialisieren
+        function initialisiereTabelle() {
+            const notenListe = document.getElementById('notenListe');
+            schuelerNamen.forEach((name, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${name}</td><td id="note-${index}">-</td>`;
+                notenListe.appendChild(row);
+            });
+        }
+
+        // Zufällige Note generieren (zwischen 1 und 6)
+        function zufaelligeNote() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+
+        // Noten auslosen
+        function auslosen() {
+            schuelerNamen.forEach((_, index) => {
+                const note = zufaelligeNote();
+                document.getElementById(`note-${index}`).textContent = note;
+            });
+        }
+
+        // Tabelle initialisieren
+        initialisiereTabelle();
+    </script>
+</body>
+</html>
